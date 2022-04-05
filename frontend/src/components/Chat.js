@@ -17,6 +17,17 @@ export default function Chat() {
         messageRef.current.value = null
     }
 
+    function enterKey(event) {
+        if (event.key == "Enter") {
+            const message = messageRef.current.value;
+            if (message === "") return
+            setChat(prevChat => {
+                return [...prevChat, {sender: "imessage", message: message}]
+            })
+            messageRef.current.value = null
+        }
+    }
+
     return (
     <div>
         <div className={styles.chattitle}>
@@ -27,7 +38,7 @@ export default function Chat() {
             {chat.map((e, i) => <div className={e.sender == "imessage" ? styles.imessage : styles.botmessage} key={i}>{e.message}</div>)}
         </div>
         <div className={styles.bottom}>
-            <input ref={messageRef} type="text" placeholder='message...' className={styles.message} />
+            <input ref={messageRef} type="text" placeholder='message...' onKeyPress={enterKey} className={styles.message} />
             <button onClick={handleChat} className={styles.send}>
                 <span className="material-icons">send</span>
             </button>
