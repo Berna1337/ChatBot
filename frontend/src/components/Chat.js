@@ -8,8 +8,15 @@ export default function Chat() {
     const [chat, setChat] = useState([]);
     const messageRef = useRef();
 
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+
     useEffect(() => {
-        checkBot()
+        checkBot();
+        scrollToBottom()
     }, [chat])
     
 
@@ -76,6 +83,7 @@ export default function Chat() {
         </div>
         <div className={styles.messages}>
             {chat.map((e, i) => <div className={e.sender == "imessage" ? styles.imessage : styles.botmessage} key={i}>{e.message}</div>)}
+            <div ref={messagesEndRef} />
         </div>
         <div className={styles.bottom}>
             <input ref={messageRef} type="text" placeholder='message...' onKeyPress={enterKey} className={styles.message} />

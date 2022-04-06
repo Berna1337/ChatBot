@@ -19,6 +19,15 @@ const FAKEMESSAGES = [
     'Not too bad, thanks',
 ];
 
+const JOKES = [
+    "How many programmers does it take to change a light bulb? None – It’s a hardware problem",
+    "['hip', 'hip']",
+    "My wife said: Honey, please go to the market and buy 1 bottle of milk. If they have eggs, bring 6.\nI came back with 6 bottles of milk.\nShe said: Why the hell did you buy 6 bottles of milk?\nI said: Because they had eggs!!",
+    "When do two functions fight? \nWhen they have arguments",
+    "To understand what recursion is, you must first understand recursion.",
+    "A programmer puts two glasses on his bedside table before going to sleep. A full one, in case he gets thirsty, and an empty one, in case he doesn't."
+]
+
 app.use(express.json())
 
 app.listen(port, () => console.log(`À escuta em http://localhost:${port}`));
@@ -30,12 +39,13 @@ app.get("/api/bot", (req, res) => {
 
 app.post("/api/chat", async (req, res) => {
     if (req.body.sender === "botmessage") return
-    else if (req.body.message.toLowerCase() === "ping") res.status(200).json({sender: "botmessage", message: "pong"})
+    else if (req.body.message.toLowerCase() === "ping") res.status(200).json({sender: "botmessage", message: "pong"});
+    else if (req.body.message.toLowerCase() === "tell me a joke") res.status(200).json({sender: "botmessage", message: randomMessage(JOKES)});
     else if (req.body.message.startsWith('!covid')) {
-        let string = req.body.message.split('!covid ') [1];
-        let string2 = string.toLowerCase()
-        let country = string2.charAt(0).toUpperCase() + string2.slice(1);
-        let resposta = await covidData(country)
+        const string = req.body.message.split('!covid ') [1];
+        const string2 = string.toLowerCase()
+        const country = string2.charAt(0).toUpperCase() + string2.slice(1);
+        const resposta = await covidData(country)
         if (!resposta) {
             res.status(404).json({sender: "botmessage", message: "Couldn't find any data for that country, make sure the country's name is correct"})
             return
