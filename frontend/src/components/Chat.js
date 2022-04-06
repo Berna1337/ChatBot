@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styles from "./Chat.module.css"
 import bernalogo from "../bernalogo.png"
 
@@ -8,23 +8,70 @@ export default function Chat() {
     const [chat, setChat] = useState([]);
     const messageRef = useRef();
 
+    useEffect(() => {
+        checkBot()
+    }, [])
+    
+
+    function checkBot() {
+    fetch('/api/bot', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(res => {
+                if (res.status == 202) {
+                    setOnline(true)
+                    return
+                }
+                else if (res.status == 500) {
+                    setOnline(false)
+                    return
+                }
+            })
+            .catch(error => console.log(error))
+    }
+
+    function checkMessage(arg) {
+        fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({sender: "imessage", message: arg})
+            }).then(res => {
+                if (res.status == 201) {
+                    setOnline(true)
+                    return res.json()
+                }
+                else if (res.status == 500) {
+                    setOnline(false)
+                    return
+                }
+            })
+            .then(data => {
+                if (!data) return
+                setChat(prevChat => {
+                    return [...prevChat, data]
+                })
+                return data
+            })
+            .catch(error => console.log(error))
+    }
+
     function handleChat(e) {
         const message = messageRef.current.value;
         if (message === "") return
         setChat(prevChat => {
             return [...prevChat, {sender: "imessage", message: message}]
         })
+        checkMessage(message)
         messageRef.current.value = null
     }
 
-    function enterKey(event) {
-        if (event.key == "Enter") {
-            const message = messageRef.current.value;
-            if (message === "") return
-            setChat(prevChat => {
-                return [...prevChat, {sender: "imessage", message: message}]
-            })
-            messageRef.current.value = null
+    function enterKey(e) {
+        if (e.key == "Enter") {
+            handleChat()
         }
     }
 
