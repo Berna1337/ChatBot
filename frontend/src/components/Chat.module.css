@@ -13,6 +13,10 @@ body {
 
 }
 
+div {
+    white-space: pre-wrap;
+}
+
 .title {
     font-size: 32px;
     padding: 24px;

@@ -10,7 +10,7 @@ export default function Chat() {
 
     useEffect(() => {
         checkBot()
-    }, [])
+    }, [chat])
     
 
     function checkBot() {
@@ -20,7 +20,7 @@ export default function Chat() {
                     'Content-Type': 'application/json',
                 }
             }).then(res => {
-                if (res.status == 202) {
+                if (res.status == 200) {
                     setOnline(true)
                     return
                 }
@@ -40,14 +40,7 @@ export default function Chat() {
                 },
                 body: JSON.stringify({sender: "imessage", message: arg})
             }).then(res => {
-                if (res.status == 201) {
-                    setOnline(true)
-                    return res.json()
-                }
-                else if (res.status == 500) {
-                    setOnline(false)
-                    return
-                }
+                return res.json()
             })
             .then(data => {
                 if (!data) return
