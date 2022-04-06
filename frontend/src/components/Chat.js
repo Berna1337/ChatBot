@@ -4,22 +4,25 @@ import bernalogo from "../bernalogo.png"
 
 export default function Chat() {
 
-    const [online, setOnline] = useState(false);
-    const [chat, setChat] = useState([]);
-    const messageRef = useRef();
+    const [online, setOnline] = useState(false); //Backend Online or Offline
+    const [chat, setChat] = useState([]); //Array with all messages
+    const messageRef = useRef(); //Ref hook for the input field
 
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef(null) //Ref Hook for autoscroll
 
+    //function for autoscroll
     const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" }) 
     }
 
+    //everytime the chat is updated, checks if backend is online and autoscrolls
     useEffect(() => {
-        checkBot();
-        scrollToBottom()
+        checkBot(); 
+        scrollToBottom() //every
     }, [chat])
     
 
+    //function to check if backend is online
     function checkBot() {
     fetch('/api/bot', {
                 method: 'GET',
@@ -39,6 +42,7 @@ export default function Chat() {
             .catch(error => console.log(error))
     }
 
+    //function that sends the client's message to backend and then after the backend logic adds the respose to the chat
     function checkMessage(arg) {
         fetch('/api/chat', {
                 method: 'POST',
@@ -59,6 +63,7 @@ export default function Chat() {
             .catch(error => console.log(error))
     }
 
+    //function to add the message to the chat
     function handleChat(e) {
         const message = messageRef.current.value;
         if (message === "") return
@@ -69,6 +74,7 @@ export default function Chat() {
         messageRef.current.value = null
     }
 
+    //function to enable sending messages by pressing the "Enter" key
     function enterKey(e) {
         if (e.key == "Enter") {
             handleChat()
@@ -82,7 +88,7 @@ export default function Chat() {
             <span className={styles.title} >Chat Bot</span>
         </div>
         <div className={styles.messages}>
-            {chat.map((e, i) => <div className={e.sender == "imessage" ? styles.imessage : styles.botmessage} key={i}>{e.message}</div>)}
+            {chat.map((e, i) => <div className={e.sender === "imessage" ? styles.imessage : styles.botmessage} key={i}>{e.message}</div>)}
             <div ref={messagesEndRef} />
         </div>
         <div className={styles.bottom}>
