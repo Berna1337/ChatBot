@@ -11,13 +11,13 @@ Após validação dos requesitos acima:
 
 1. O primeiro passo é clonar o repositorio do projeto através do comando:
 
-```git clone https://github.com/Berna1337/WebDevChallenge-visor.ai.git```
+```git clone https://github.com/Berna1337/WebDevChallenge.git```
 
 
 
 2. Acedemos à pasta do repositório responsavel pelo frontend atraves do comando:
 
-```cd WebDevChallenge-visor.ai/frontend/```
+```cd WebDevChallenge/frontend/```
 
 
 
