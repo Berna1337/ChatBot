@@ -1,5 +1,5 @@
-# WebDevChallenge-visor.ai
-Web Development Challenge for visor.ai
+# WebDevChallenge
+Web Development Challenge
 
 ## Requesitos:
 1. Node.js (https://nodejs.org/en/)
