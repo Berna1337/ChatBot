@@ -97,7 +97,7 @@ export default function Chat() {
                 <span className="material-icons">send</span>
             </button>
         </div>
-        <p className={styles.sub}>visor.ai Web Dev Challenge by Bernardo Cruz</p>
+        <p className={styles.sub}>Chat Bot by Bernardo Cruz</p>
     </div>
     )
 }

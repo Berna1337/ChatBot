@@ -1,5 +1,5 @@
-# WebDevChallenge-visor.ai
-Web Development Challenge for visor.ai
+# Chat Bot
+Simple Chat Bot project
 
 ## Requesitos:
 1. Node.js (https://nodejs.org/en/)
@@ -11,13 +11,13 @@ Após validação dos requesitos acima:
 
 1. O primeiro passo é clonar o repositorio do projeto através do comando:
 
-```git clone https://github.com/Berna1337/WebDevChallenge-visor.ai.git```
+```git clone https://github.com/Berna1337/ChatBot.git```
 
 
 
 2. Acedemos à pasta do repositório responsavel pelo frontend atraves do comando:
 
-```cd WebDevChallenge-visor.ai/frontend/```
+```cd ChatBot/frontend/```
 
 
 
