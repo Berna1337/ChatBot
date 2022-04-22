@@ -8,14 +8,14 @@ export default function Chat() {
     const [chat, setChat] = useState([]); //Array with all messages
     const messageRef = useRef(); //Ref hook for the input field
 
-    const messagesEndRef = useRef(null) //Ref Hook for autoscroll
+    const messagesEndRef = useRef(null) //Ref Hook for auto-scroll
 
-    //function for autoscroll
+    //function for auto-scroll
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" }) 
     }
 
-    //everytime the chat is updated, checks if backend is online and autoscrolls
+    //every time the chat is updated, checks if backend is online and auto-scrolls
     useEffect(() => {
         checkBot(); 
         scrollToBottom() //every

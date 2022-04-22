@@ -3,7 +3,7 @@ const express = require("express")
 const app = express()
 const port = process.env.PORT ?? 3025
 
-//array with random messages since this bot doesnt use ML/AI
+//array with random messages since this bot doesn't use ML/AI
 const FAKEMESSAGES = [
     'Hi there, I\'m Berna and you?',
     'How are you?',
