@@ -1,7 +1,9 @@
 # Chat Bot
 Simple Chat Bot project
 
-Bot sends random messages, tells jokes with "tell me a joke" and shows COVID-19 stats whith "!covid [country]"
+Bot sends random messages, 
+tells jokes with "tell me a joke" 
+and shows COVID-19 stats whith "!covid [country]"
 ## Requesitos:
 1. Node.js (https://nodejs.org/en/)
 
